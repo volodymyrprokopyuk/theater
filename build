@@ -1,0 +1,27 @@
+#!/usr/bin/env runghc
+import Development.Shake
+import Development.Shake.FilePath
+import Development.Shake.Command
+import Development.Shake.Util
+import Text.Printf
+
+main :: IO ()
+main = shakeArgs shakeOptions { shakeFiles= ".build/" } $ do
+  want [ "index.html" ]
+
+  "index.html" *> \ target -> do
+    views <- getDirectoryFiles ""
+      [ "public/views/*.jade" ]
+    stylesheets <- getDirectoryFiles ""
+      [ "public/stylesheets/*.css" ]
+    javascripts <- getDirectoryFiles ""
+      [ "public/javascripts/*.js" ]
+    need $ views ++ stylesheets ++ javascripts
+    let
+      jade :: String
+      jade = printf "jade --pretty --out %s %s" "."
+        "public/views/index.jade"
+    cmd "bash -c" [ jade ]
+
+  "clean" ~> do
+    removeFilesAfter "" [ "index.html" ]
