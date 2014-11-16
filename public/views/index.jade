@@ -1,4 +1,8 @@
 extends base
 
 block main
-  p Svitlana
+  div(ng-controller="mainCtrl")
+    h4 Seat
+      div {{ seat.id }}
+      div {{ seat.amount }}
+      div {{ seat.updatedOn }}

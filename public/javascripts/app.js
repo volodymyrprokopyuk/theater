@@ -14,6 +14,10 @@ var Seat = function() {
   };
 };
 
+app.controller('mainCtrl', function($scope) {
+  $scope.seat = Seat();
+});
+
 // save/cancel
 // import/export
 // available/sold
