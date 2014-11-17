@@ -17,12 +17,12 @@ var Seat = function() {
 
 app.factory('seats', function() {
   var seats = [ ];
-
-  // id, status
+  // id, status, currency
   seats = _.range(1, 65).map(function(id) {
     var seat = Seat();
     seat.id = id;
     seat.status = 'available';
+    seat.currency = 'EUR';
     return seat;
   // sector
   }).map(function(seat) {

@@ -12,3 +12,27 @@ script#row(type="text/ng-template")
       div(ng-if="(sector === 'B') || (sector === 'C')")
         .col-xs-1
           seat
+
+script#booking(type="text/ng-template")
+  //.row
+  form.form-inline(name="booking" ng-submit="saveSeat(seat)" novalidate)
+    .form-group
+      //.col-xs-2
+      input.form-control(type="text" name="firstName" required \
+        ng-model="seat.firstName" placeholder="First name")
+    .form-group
+      //.col-xs-4
+      input.form-control(type="text" name="lastName" required \
+        ng-model="seat.lastName" placeholder="Last name")
+    .form-group
+      //.col-xs-2
+      .input-group
+        input.form-control(type="text" name="amount" required \
+          ng-model="seat.amount" placeholder="Amount")
+        .input-group-addon EUR
+    //.form-group
+    //.col-xs-1
+    button.btn.btn-default(type="submit") Save
+    //.form-group
+    //.col-xs-1
+    button.btn.btn-default(ng-click="cancel()") Cancel
