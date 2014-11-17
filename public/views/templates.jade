@@ -1,0 +1,14 @@
+script#seat(type="text/ng-template")
+  button.btn.btn-default.btn-xs
+    | {{ seat.sector }} {{ seat.row }}/{{ seat.seat }}
+
+script#row(type="text/ng-template")
+  .row
+    p
+    div(ng-repeat="seat in seats | rowFilter:sector:row")
+      div(ng-if="(sector === 'A') || (sector === 'D')")
+        .col-xs-2
+          seat
+      div(ng-if="(sector === 'B') || (sector === 'C')")
+        .col-xs-1
+          seat

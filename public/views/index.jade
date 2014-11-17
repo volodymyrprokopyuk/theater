@@ -2,7 +2,17 @@ extends base
 
 block main
   div(ng-controller="mainCtrl")
-    h4 Seat
-      div {{ seat.id }}
-      div {{ seat.amount }}
-      div {{ seat.updatedOn }}
+    div(ng-repeat="row in [ 1, 2, 3 ]")
+      .row
+        .col-xs-3
+          row(sector="A" row="{{ row }}")
+        .col-xs-6
+        .col-xs-3
+          row(sector="D" row="{{ row }}")
+
+    div(ng-repeat="row in [ 1, 2 ]")
+      .row
+        .col-xs-6
+          row(sector="B" row="{{ row }}")
+        .col-xs-6
+          row(sector="C" row="{{ row }}")
