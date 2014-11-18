@@ -48,17 +48,20 @@ app.controller('mainCtrl', function($scope, seats) {
     return _.filter($scope.seats, { status: 'booked' });
   };
 
+  $scope.export = function() {
+    var json = angular.toJson($scope.seats);
+    var urlData = 'data:text/json;charset=utf-8,' + json;
+    var a = document.createElement('a');
+    $(a).attr('href', urlData).attr('download', 'bookings.json');
+    a.click();
+  };
+
   $scope.import = function() {
     localStorage.setItem('bookings', JSON.stringify($scope.seats[0]));
     console.log(JSON.parse(localStorage.getItem('bookings')));
   };
 
-  $scope.export = function() {
-    //var json = encodeURIComponent(JSON.stringify($scope.seats));
-    var json = JSON.stringify($scope.seats);
-    var urlData = 'data:text/json;charset=utf-8,' + json;
-    var a = document.createElement('a');
-    $(a).attr('href', urlData).attr('download', 'bookings.json');
-    a.click();
+  $scope.clear = function() {
+
   };
 });

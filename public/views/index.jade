@@ -21,17 +21,20 @@ block main
     .row
       .col-xs-1
         p
-        button.btn.btn-info.btn-xs(ng-click="import(import)") Import
+        button.btn.btn-info.btn-sm(ng-click="export()") Export
       .col-xs-1
         p
-        button.btn.btn-info.btn-xs(ng-click="export()") Export
-      .col-xs-8
-      .col-xs-1
-        total
+        button.btn.btn-info.btn-sm(ng-click="import()") Import
       .col-xs-1
         p
-        button.btn.btn-info.btn-xs(ng-click="bookings = !bookings")
+        button.btn.btn-danger.btn-sm(ng-click="clear()") Clear
+      .col-xs-6
+      .col-xs-1
+        p
+        button.btn.btn-info.btn-sm(ng-click="bookings = !bookings")
           | {{ bookings ? 'Hide' : 'Bookings' }}
+      .col-xs-2
+        total
     div(ng-if="seat")
       p
       booking

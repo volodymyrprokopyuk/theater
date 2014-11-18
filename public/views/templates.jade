@@ -16,7 +16,7 @@ script#row(type="text/ng-template")
 
 script#total(type="text/ng-template")
   h4
-    span.label.label-info Total: {{ booked().length }}/{{ seats.length }}
+    span.label.label-warning Total: {{ booked().length }}/{{ seats.length }}
 
 script#booking(type="text/ng-template")
   .panel(ng-class="(seat.status === 'available') && 'panel-default' \
@@ -62,26 +62,26 @@ script#booking(type="text/ng-template")
 
 script#bookings(type="text/ng-template")
   .panel.panel-info
-    .panel-heading
-      div.text-center Bookings
+    .panel-heading.text-center
+      strong Bookings
     .panel-body
       table.table.table-striped.table-condensed
         thead
           tr
             th.text-right #
-            th Sector
+            th.text-center Sector
             th Row
             th Seat
             th Status
             th First name
             th Last name
-            th Amount
-            th Booked on
+            th.text-right Amount
+            th.text-right Booked on
         tbody
           tr(ng-repeat="seat in seats"
             ng-class="(seat.status === 'booked') && 'info' || ''")
             td.text-right {{ seat.id }}
-            td {{ seat.sector }}
+            td.text-center {{ seat.sector }}
             td {{ seat.row }}
             td {{ seat.seat }}
             td
