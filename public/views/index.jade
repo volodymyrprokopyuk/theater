@@ -19,11 +19,18 @@ block main
         .col-xs-6
           row(sector="C" row="{{ row }}")
     .row
-      .col-xs-10
-        total.text-right
-      .col-xs-2
+      .col-xs-1
         p
-        button.btn.btn-success.btn-xs(ng-click="bookings = !bookings")
+        button.btn.btn-info.btn-xs(ng-click="import(import)") Import
+      .col-xs-1
+        p
+        button.btn.btn-info.btn-xs(ng-click="export()") Export
+      .col-xs-8
+      .col-xs-1
+        total
+      .col-xs-1
+        p
+        button.btn.btn-info.btn-xs(ng-click="bookings = !bookings")
           | {{ bookings ? 'Hide' : 'Bookings' }}
     div(ng-if="seat")
       p
