@@ -19,9 +19,15 @@ block main
         .col-xs-6
           row(sector="C" row="{{ row }}")
     .row
-      .col-xs-12
-        p
+      .col-xs-10
         total.text-right
+      .col-xs-2
+        p
+        button.btn.btn-success.btn-xs(ng-click="bookings = !bookings")
+          | {{ bookings ? 'Hide' : 'Bookings' }}
     div(ng-if="seat")
       p
       booking
+    div(ng-if="bookings")
+      p
+      bookings

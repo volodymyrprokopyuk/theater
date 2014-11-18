@@ -28,6 +28,7 @@ app.controller('mainCtrl', function($scope, seats) {
 
   $scope.book = function(seat) {
     seat.status = 'booked';
+    seat.amount = parseInt(seat.amount);
     seat.updatedOn = moment();
     seats.update(seat);
     $scope.seat = null;
