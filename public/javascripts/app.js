@@ -57,11 +57,14 @@ app.controller('mainCtrl', function($scope, seats) {
   };
 
   $scope.import = function() {
-    localStorage.setItem('bookings', JSON.stringify($scope.seats[0]));
-    console.log(JSON.parse(localStorage.getItem('bookings')));
+    $scope.importing = !$scope.importing;
+    if ($scope.imported) {
+      alert($scope.imported);
+      $scope.imported = null;
+    }
   };
 
   $scope.clear = function() {
-
+    $scope.clearing = !$scope.clearing;
   };
 });

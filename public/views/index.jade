@@ -2,42 +2,62 @@ extends base
 
 block main
   div(ng-controller="mainCtrl")
-    .row
-      .col-xs-12
-        h4.text-center Theatre booking
-    div(ng-repeat="row in [ 1, 2, 3 ]")
-      .row
-        .col-xs-3
-          row(sector="A" row="{{ row }}")
-        .col-xs-6
-        .col-xs-3
-          row(sector="D" row="{{ row }}")
-    div(ng-repeat="row in [ 1, 2 ]")
-      .row
-        .col-xs-6
-          row(sector="B" row="{{ row }}")
-        .col-xs-6
-          row(sector="C" row="{{ row }}")
-    .row
-      .col-xs-1
-        p
-        button.btn.btn-info.btn-sm(ng-click="export()") Export
-      .col-xs-1
-        p
-        button.btn.btn-info.btn-sm(ng-click="import()") Import
-      .col-xs-1
-        p
-        button.btn.btn-danger.btn-sm(ng-click="clear()") Clear
-      .col-xs-6
-      .col-xs-1
-        p
-        button.btn.btn-info.btn-sm(ng-click="bookings = !bookings")
-          | {{ bookings ? 'Hide' : 'Bookings' }}
-      .col-xs-2
-        total
-    div(ng-if="seat")
-      p
-      booking
-    div(ng-if="bookings")
-      p
-      bookings
+    .panel.panle-default
+      .panel-body
+        .row
+          .col-xs-12
+            h4.text-center Theatre booking
+        div(ng-repeat="row in [ 1, 2, 3 ]")
+          .row
+            .col-xs-3
+              row(sector="A" row="{{ row }}")
+            .col-xs-6
+            .col-xs-3
+              row(sector="D" row="{{ row }}")
+        div(ng-repeat="row in [ 1, 2 ]")
+          .row
+            .col-xs-6
+              row(sector="B" row="{{ row }}")
+            .col-xs-6
+              row(sector="C" row="{{ row }}")
+        .row
+          .col-xs-1
+            p
+            button.btn.btn-info.btn-sm(ng-click="export()") Export
+          .col-xs-1
+            p
+            button.btn.btn-sm(ng-click="import()"
+              ng-class="importing && 'btn-success' || 'btn-info'") Import
+          .col-xs-1
+            p
+            button.btn.btn-danger.btn-sm(ng-click="clear()"
+              ng-class="clearing && 'btn-success' || 'btn-danger'")
+              | {{ clearing ? 'No' : 'Clear' }}
+          .col-xs-6
+          .col-xs-1.text-right
+            p
+            button.btn.btn-info.btn-sm(ng-click="bookings = !bookings")
+              | {{ bookings ? 'Hide' : 'Bookings' }}
+          .col-xs-2.text-right
+            total
+        div(ng-if="clearing")
+          .row
+            .col-xs-12
+              p
+              .alert.alert-danger
+                .row
+                  .col-xs-8
+                    strong You are about to delete all bookings
+                  .col-xs-4.text-right
+                    button.btn.btn-danger.btn-sm Yes, delete all bookings
+        div(ng-show="importing")
+          .row
+            .col-xs-12
+              p
+              textarea.form-control(ng-model="imported")
+        div(ng-if="seat")
+          p
+          booking
+        div(ng-if="bookings")
+          p
+          bookings
