@@ -2,6 +2,9 @@ extends base
 
 block main
   div(ng-controller="mainCtrl")
+    .row
+      .col-xs-12
+        h4.text-center Theatre booking
     div(ng-repeat="row in [ 1, 2, 3 ]")
       .row
         .col-xs-3
@@ -15,4 +18,10 @@ block main
           row(sector="B" row="{{ row }}")
         .col-xs-6
           row(sector="C" row="{{ row }}")
-    ng-include(src="'booking'")
+    .row
+      .col-xs-12
+        p
+        total.text-right
+    div(ng-if="seat")
+      p
+      booking

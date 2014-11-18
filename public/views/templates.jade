@@ -1,11 +1,12 @@
 script#seat(type="text/ng-template")
-  button.btn.btn-default.btn-xs
+  button.btn.btn-xs(ng-click="newBooking(seat)" \
+    ng-class="(seat.status === 'available') && 'btn-default' || 'btn-info'")
     | {{ seat.sector }} {{ seat.row }}/{{ seat.seat }}
 
 script#row(type="text/ng-template")
   .row
     p
-    div(ng-repeat="seat in seats | rowFilter:sector:row")
+    div(ng-repeat="seat in seats | filterRow:sector:row")
       div(ng-if="(sector === 'A') || (sector === 'D')")
         .col-xs-2
           seat
@@ -13,26 +14,48 @@ script#row(type="text/ng-template")
         .col-xs-1
           seat
 
+script#total(type="text/ng-template")
+  h4
+    span.label.label-info Total: {{ booked().length }}/{{ seats.length }}
+
 script#booking(type="text/ng-template")
-  //.row
-  form.form-inline(name="booking" ng-submit="saveSeat(seat)" novalidate)
-    .form-group
-      //.col-xs-2
-      input.form-control(type="text" name="firstName" required \
-        ng-model="seat.firstName" placeholder="First name")
-    .form-group
-      //.col-xs-4
-      input.form-control(type="text" name="lastName" required \
-        ng-model="seat.lastName" placeholder="Last name")
-    .form-group
-      //.col-xs-2
-      .input-group
-        input.form-control(type="text" name="amount" required \
-          ng-model="seat.amount" placeholder="Amount")
-        .input-group-addon EUR
-    //.form-group
-    //.col-xs-1
-    button.btn.btn-default(type="submit") Save
-    //.form-group
-    //.col-xs-1
-    button.btn.btn-default(ng-click="cancel()") Cancel
+  .panel(ng-class="(seat.status === 'available') && 'panel-default' \
+    || 'panel-info'")
+    .panel-heading
+      .row
+        .col-xs-6
+          strong.badge {{ seat.sector }} {{ seat.row }}/{{ seat.seat }}
+        .col-xs-1
+          .label(ng-class="(seat.status === 'available') && 'label-default' \
+            || 'label-info'")
+            | {{ seat.status }}
+        .col-xs-3
+          div(ng-if="seat.status === 'booked'")
+            button.btn.btn-warning.btn-xs(ng-click="unbook(seat)") Unbook
+        .col-xs-2
+          div.text-right {{ seat.updatedOn | dt }}
+    .panel-body
+      form(name="booking" ng-submit="book(seat)" novalidate)
+        .row
+          .form-group.col-xs-3(ng-class="booking.firstName.$dirty \
+            && (booking.firstName.$valid && 'has-success' || 'has-error')")
+            input.form-control(type="text" name="firstName" required
+              ng-model="seat.firstName" placeholder="First name")
+          .form-group.col-xs-3(ng-class="booking.lastName.$dirty \
+            && (booking.lastName.$valid && 'has-success' || 'has-error')")
+            input.form-control(type="text" name="lastName" required
+              ng-model="seat.lastName" placeholder="Last name")
+          .form-group.col-xs-2(ng-class="booking.amount.$dirty \
+            && (booking.amount.$valid && 'has-success' || 'has-error')")
+            .input-group
+              input.form-control.text-right(type="text" name="amount"
+                required ng-pattern="/^[1-9]\\d*(?:[.,]\\d{1,2})?$/"
+                ng-model="seat.amount" placeholder="Amount")
+              .input-group-addon {{ seat.currency }}
+          .col-xs-2
+          .col-xs-1
+            button.btn.btn-danger(ng-click="cancelBooking()") Cancel
+          .col-xs-1
+            button.btn.btn-success(type="submit"
+              ng-disabled="booking.$invalid")
+              | {{ seat.status === 'available' ? 'Book' : 'Update' }}

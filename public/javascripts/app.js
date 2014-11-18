@@ -15,81 +15,35 @@ var Seat = function() {
   };
 };
 
-app.factory('seats', function() {
-  var seats = [ ];
-  // id, status, currency
-  seats = _.range(1, 65).map(function(id) {
-    var seat = Seat();
-    seat.id = id;
-    seat.status = 'available';
-    seat.currency = 'EUR';
-    return seat;
-  // sector
-  }).map(function(seat) {
-    seat.sector = (seat.id > 0 && seat.id < 13) ? 'A'
-      : (seat.id > 12 && seat.id < 33) ? 'B'
-      : (seat.id > 32 && seat.id < 53) ? 'C'
-      : (seat.id > 52 && seat.id < 65) ? 'D' : '';
-    return seat;
-  });
-  // row, seat
-  var location = { };
-  var distribute = function(seatsPerRow, seat) {
-    _.merge(seat, ++location.seat > seatsPerRow
-      ? (location.seat = 1, ++location.row, location) : location);
-  };
-  var distribute4 = _.partial(distribute, 4);
-  var distribute10 = _.partial(distribute, 10);
-  location = { row: 1, seat: 0 };
-  _.filter(seats, { sector: 'A' }).map(distribute4);
-  location = { row: 1, seat: 0 };
-  _.filter(seats, { sector: 'B' }).map(distribute10);
-  location = { row: 1, seat: 0 };
-  _.filter(seats, { sector: 'C' }).map(distribute10);
-  location = { row: 1, seat: 0 };
-  _.filter(seats, { sector: 'D' }).map(distribute4);
-
-  return {
-    find: function() {
-      return seats;
-    }
-  };
-});
-
-app.filter('rowFilter', function() {
-  return function(seats, sector, row) {
-    return _.filter(seats, { sector: sector, row: row });
-  };
-});
-
 app.controller('mainCtrl', function($scope, seats) {
-  $scope.seats = seats.find();
-});
+  $scope.seats = seats.all();
 
-app.directive('seat', function() {
-  return {
-    restrict: 'E'
-    , template: function() {
-      return $('#seat').html();
-    }
+  $scope.newBooking = function(seat) {
+    $scope.seat = _.clone(seat);
+  };
+
+  $scope.cancelBooking = function() {
+    $scope.seat = null;
+  };
+
+  $scope.book = function(seat) {
+    seat.status = 'booked';
+    seat.updatedOn = moment();
+    seats.update(seat);
+    $scope.seat = null;
+  };
+
+  $scope.unbook = function(seat) {
+    seat.status = 'available';
+    seat.firstName = '';
+    seat.lastName = '';
+    seat.amount = 0.0;
+    seat.updatedOn = moment();
+    seats.update(seat);
+    $scope.seat = null;
+  };
+
+  $scope.booked = function() {
+    return _.filter($scope.seats, { status: 'booked' });
   };
 });
-
-app.directive('row', function() {
-  return {
-    restrict: 'E'
-    , template: function() {
-      return $('#row').html();
-    }, scope: true
-    , link: function(scope, elem, attrs) {
-      scope.sector = attrs.sector;
-      scope.row = parseInt(attrs.row);
-      scope.span = parseInt(attrs.span);
-    }
-  };
-});
-
-// save/cancel
-// import/export
-// available/sold
-// total
