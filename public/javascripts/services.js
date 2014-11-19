@@ -153,7 +153,7 @@ app.factory('tr', function() {
     , 'Yes, delete all bookings': 'Так, знищити інформацію про всі резервування'
     , 'Paste here previously exported file content and press Import again'
       : 'Скопіюйте сюди вміст попередньо експортованого файлу і нарисніть Імпорт ще раз'
-    , 'available': 'вілне'
+    , 'available': 'вільне'
     , 'booked': 'зарезервоване'
     , 'Unbook': 'Звільнити'
     , 'First name': "Ім'я"
