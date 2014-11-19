@@ -135,6 +135,8 @@ app.factory('tr', function() {
     , 'Seat': 'Seat'
     , 'Status': 'Status'
     , 'Booked on': 'Booked on'
+    , 'The data you are trying to import is corrupted'
+      : 'The data you are trying to import is corrupted'
   };
 
   var ua = {
@@ -168,6 +170,8 @@ app.factory('tr', function() {
     , 'Seat': 'Місце'
     , 'Status': 'Статус'
     , 'Booked on': 'Зарезервоване'
+    , 'The data you are trying to import is corrupted'
+      : 'Дані які ви намагаєтеся імпортувати пошкоджені'
   };
 
   var trans = ua;

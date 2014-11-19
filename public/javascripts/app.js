@@ -60,7 +60,7 @@ app.controller('mainCtrl', function($scope, seats, tr) {
   $scope.import = function() {
     $scope.importing = !$scope.importing;
     $scope.imported && (seats.load($scope.imported)
-      || alert('The data you are trying to import is corrupted')
+      || alert(tr.tr('The data you are trying to import is corrupted'))
       , $scope.imported = null);
   };
 
