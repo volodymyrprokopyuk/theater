@@ -609,7 +609,7 @@ app.controller('mainCtrl', function($scope, seats, tr) {
   $scope.import = function() {
     $scope.importing = !$scope.importing;
     $scope.imported && (seats.load($scope.imported)
-      || alert('The data you are trying to import is corrupted')
+      || alert(tr.tr('The data you are trying to import is corrupted'))
       , $scope.imported = null);
   };
 
@@ -770,6 +770,8 @@ app.factory('tr', function() {
     , 'Seat': 'Seat'
     , 'Status': 'Status'
     , 'Booked on': 'Booked on'
+    , 'The data you are trying to import is corrupted'
+      : 'The data you are trying to import is corrupted'
   };
 
   var ua = {
@@ -803,6 +805,8 @@ app.factory('tr', function() {
     , 'Seat': 'Місце'
     , 'Status': 'Статус'
     , 'Booked on': 'Зарезервоване'
+    , 'The data you are trying to import is corrupted'
+      : 'Дані які ви намагаєтеся імпортувати пошкоджені'
   };
 
   var trans = ua;
