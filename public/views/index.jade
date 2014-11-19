@@ -6,7 +6,14 @@ block main
       .panel-body
         .row
           .col-xs-12
-            h4.text-center Theatre booking
+            h4.text-center {{ tr('Theatre booking') }}
+        .row
+          .col-xs-12
+            .btn-toolbar.pull-right
+              .btn-group
+                button.btn.btn-success.btn-xs(ng-click="lng('en')") en
+              .btn-group
+                button.btn.btn-success.btn-xs(ng-click="lng('ua')") ua
         div(ng-repeat="row in [ 1, 2, 3 ]")
           .row
             .col-xs-3
@@ -23,22 +30,24 @@ block main
         .row
           .col-xs-1
             p
-            button.btn.btn-info.btn-sm(ng-click="export()") Export
+            button.btn.btn-info.btn-sm(ng-click="export()")
+              | {{ tr('Export') }}
           .col-xs-1
             p
             button.btn.btn-sm(ng-click="import()"
-              ng-class="importing && 'btn-success' || 'btn-info'") Import
+              ng-class="importing && 'btn-success' || 'btn-info'")
+              | {{ tr('Import') }}
           .col-xs-1
             p
             button.btn.btn-danger.btn-sm(ng-click="askClear()"
               ng-class="clearing && 'btn-success' || 'btn-danger'")
-              | {{ clearing ? 'No' : 'Clear' }}
-          .col-xs-6
+              | {{ clearing ? tr('No') : tr('Clear') }}
+          .col-xs-5
           .col-xs-1.text-right
             p
             button.btn.btn-info.btn-sm(ng-click="bookings = !bookings")
-              | {{ bookings ? 'Hide' : 'Bookings' }}
-          .col-xs-2.text-right
+              | {{ bookings ? tr('Hide') : tr('Bookings') }}
+          .col-xs-3.text-right
             total
         div(ng-if="clearing")
           .row
@@ -47,16 +56,16 @@ block main
               .alert.alert-danger
                 .row
                   .col-xs-8
-                    strong You are about to delete all bookings
+                    strong {{ tr('You are about to delete all bookings') }}
                   .col-xs-4.text-right
                     button.btn.btn-danger.btn-sm(ng-click="clear()")
-                      | Yes, delete all bookings
+                      | {{ tr('Yes, delete all bookings') }}
         div(ng-show="importing")
           .row
             .col-xs-12
               p
               textarea.form-control(ng-model="imported"
-                placeholder="Paste here previously exported file content and press Import again")
+                placeholder="{{ tr('Paste here previously exported file content and press Import again') }}")
         div(ng-if="seat")
           p
           booking
@@ -67,4 +76,4 @@ block main
           .col-xs-12.text-right
             p
             h6
-              small Designed by Volodymyr Prokopyuk, 2014
+              small {{ tr('Designed by Volodymyr Prokopyuk, 2014') }}

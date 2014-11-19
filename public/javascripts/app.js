@@ -15,7 +15,7 @@ var Seat = function() {
   };
 };
 
-app.controller('mainCtrl', function($scope, seats) {
+app.controller('mainCtrl', function($scope, seats, tr) {
   $scope.seats = seats.all();
 
   $scope.newBooking = function(seat) {
@@ -72,5 +72,13 @@ app.controller('mainCtrl', function($scope, seats) {
     seats.clear();
     seats.save();
     $scope.clearing = false;
+  };
+
+  $scope.lng = function(language) {
+    tr.lng(language);
+  };
+
+  $scope.tr = function(expression) {
+    return tr.tr(expression);
   };
 });

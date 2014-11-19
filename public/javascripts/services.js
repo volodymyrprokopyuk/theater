@@ -101,3 +101,87 @@ app.factory('seats', function() {
     , clear: clear
   };
 });
+
+app.factory('tr', function() {
+
+  var en = {
+    'Theatre booking': 'Theatre booking'
+    , 'Export': 'Export'
+    , 'Import': 'Import'
+    , 'No': 'No'
+    , 'Clear': 'Clear'
+    , 'Hide': 'Hide'
+    , 'Bookings': 'Bookings'
+    , 'Total': 'Total'
+    , 'Designed by Volodymyr Prokopyuk, 2014'
+      : 'Designed by Volodymyr Prokopyuk, 2014'
+    , 'You are about to delete all bookings'
+      : 'You are about to delete all bookings'
+    , 'Yes, delete all bookings': 'Yes, delete all bookings'
+    , 'Paste here previously exported file content and press Import again'
+      : 'Paste here previously exported file content and press Import again'
+    , 'available': 'available'
+    , 'booked': 'booked'
+    , 'Unbook': 'Unbook'
+    , 'First name': 'First name'
+    , 'Last name': 'Last name'
+    , 'Amount': 'Amount'
+    , 'EUR': 'EUR'
+    , 'Cancel': 'Cancel'
+    , 'Book': 'Book'
+    , 'Update': 'Update'
+    , 'Sector': 'Sector'
+    , 'Row': 'Row'
+    , 'Seat': 'Seat'
+    , 'Status': 'Status'
+    , 'Booked on': 'Booked on'
+  };
+
+  var ua = {
+    'Theatre booking': 'Резервування театральних квитків'
+    , 'Export': 'Експорт'
+    , 'Import': 'Імпорт'
+    , 'No': 'Ні'
+    , 'Clear': 'Знищити'
+    , 'Hide': 'Приховати'
+    , 'Bookings': 'Резервування'
+    , 'Total': 'Зарезервовано'
+    , 'Designed by Volodymyr Prokopyuk, 2014'
+      : 'Розробка: Володимир Прокопюк, 2014'
+    , 'You are about to delete all bookings'
+      : 'Ви хочете знищити інформацію про всі резервування'
+    , 'Yes, delete all bookings': 'Так, знищити інформацію про всі резервування'
+    , 'Paste here previously exported file content and press Import again'
+      : 'Скопіюйте сюди вміст попередньо експортованого файлу і нарисніть Імпорт ще раз'
+    , 'available': 'вілне'
+    , 'booked': 'зарезервоване'
+    , 'Unbook': 'Звільнити'
+    , 'First name': "Ім'я"
+    , 'Last name': 'Прізвище'
+    , 'Amount': 'Вартість'
+    , 'EUR': 'ГРН'
+    , 'Cancel': 'Скасувати'
+    , 'Book': 'Зарезервувати'
+    , 'Update': 'Актуалізувати'
+    , 'Sector': 'Сектор'
+    , 'Row': 'Ряд'
+    , 'Seat': 'Місце'
+    , 'Status': 'Статус'
+    , 'Booked on': 'Зарезервоване'
+  };
+
+  var trans = en;
+
+  var lng = function(language) {
+    trans = language === 'en' ? en
+      : language === 'ua' ? ua
+      : en;
+  };
+
+
+  var tr = function(expression) {
+    return trans[expression] || 'UNKNOWN EXPRESSION';
+  };
+
+  return { tr: tr, lng: lng };
+});

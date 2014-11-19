@@ -16,7 +16,8 @@ script#row(type="text/ng-template")
 
 script#total(type="text/ng-template")
   h4
-    span.label.label-warning Total: {{ booked().length }}/{{ seats.length }}
+    span.label.label-warning
+      | {{ tr('Total') }}: {{ booked().length }}/{{ seats.length }}
 
 script#booking(type="text/ng-template")
   .panel(ng-class="(seat.status === 'available') && 'panel-default' \
@@ -25,13 +26,14 @@ script#booking(type="text/ng-template")
       .row
         .col-xs-6
           strong.badge {{ seat.sector }} {{ seat.row }}/{{ seat.seat }}
-        .col-xs-1
+        .col-xs-2
           .label(ng-class="(seat.status === 'available') && 'label-default' \
             || 'label-info'")
-            | {{ seat.status }}
-        .col-xs-3
+            | {{ tr(seat.status) }}
+        .col-xs-2
           div(ng-if="seat.status === 'booked'")
-            button.btn.btn-warning.btn-xs(ng-click="unbook(seat)") Unbook
+            button.btn.btn-warning.btn-xs(ng-click="unbook(seat)")
+              | {{ tr('Unbook') }}
         .col-xs-2
           div.text-right {{ seat.updatedOn | dt }}
     .panel-body
@@ -40,43 +42,43 @@ script#booking(type="text/ng-template")
           .form-group.col-xs-3(ng-class="booking.firstName.$dirty \
             && (booking.firstName.$valid && 'has-success' || 'has-error')")
             input.form-control.input-sm(type="text" name="firstName" required
-              ng-model="seat.firstName" placeholder="First name")
+              ng-model="seat.firstName" placeholder="{{ tr('First name') }}")
           .form-group.col-xs-3(ng-class="booking.lastName.$dirty \
             && (booking.lastName.$valid && 'has-success' || 'has-error')")
             input.form-control.input-sm(type="text" name="lastName" required
-              ng-model="seat.lastName" placeholder="Last name")
+              ng-model="seat.lastName" placeholder="{{ tr('Last name') }}")
           .form-group.col-xs-2(ng-class="booking.amount.$dirty \
             && (booking.amount.$valid && 'has-success' || 'has-error')")
             .input-group
               input.form-control.input-sm.text-right(type="text" name="amount"
                 required ng-pattern="/^[1-9]\\d*(?:[.,]\\d{1,2})?$/"
-                ng-model="seat.amount" placeholder="Amount")
-              .input-group-addon {{ seat.currency }}
+                ng-model="seat.amount" placeholder="{{ tr('Amount') }}")
+              .input-group-addon {{ tr(seat.currency) }}
           .col-xs-2
-          .col-xs-1
-            button.btn.btn-danger.btn-sm(ng-click="cancelBooking()") Cancel
-          .col-xs-1
+            button.btn.btn-danger.btn-sm(ng-click="cancelBooking()")
+              | {{ tr('Cancel') }}
+          .col-xs-2.text-right
             button.btn.btn-success.btn-sm(type="submit"
               ng-disabled="booking.$invalid")
-              | {{ seat.status === 'available' ? 'Book' : 'Update' }}
+              | {{ seat.status === 'available' ? tr('Book') : tr('Update') }}
 
 script#bookings(type="text/ng-template")
   .panel.panel-info
     .panel-heading.text-center
-      strong Bookings
+      strong {{ tr('Bookings') }}
     .panel-body
       table.table.table-striped.table-condensed
         thead
           tr
             th.text-right #
-            th.text-center Sector
-            th Row
-            th Seat
-            th Status
-            th First name
-            th Last name
-            th.text-right Amount
-            th.text-right Booked on
+            th.text-center {{ tr('Sector') }}
+            th {{ tr('Row') }}
+            th {{ tr('Seat') }}
+            th {{ tr('Status') }}
+            th {{ tr('First name') }}
+            th {{ tr('Last name') }}
+            th.text-right {{ tr('Amount') }}
+            th.text-right {{ tr('Booked on') }}
         tbody
           tr(ng-repeat="seat in seats"
             ng-class="(seat.status === 'booked') && 'info' || ''")
@@ -87,8 +89,9 @@ script#bookings(type="text/ng-template")
             td
               a(ng-click="newBooking(seat)" href="#")
                 .label(ng-class="(seat.status === 'available') \
-                  && 'label-default' || 'label-info'") {{ seat.status }}
+                  && 'label-default' || 'label-info'")
+                  | {{ tr(seat.status) }}
             td {{ seat.firstName }}
             td {{ seat.lastName }}
-            td.text-right {{ seat.amount | curr }} {{ seat.currency }}
+            td.text-right {{ seat.amount | curr }} {{ tr(seat.currency) }}
             td.text-right {{ seat.updatedOn | dt }}
