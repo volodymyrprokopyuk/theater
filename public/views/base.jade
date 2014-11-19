@@ -4,17 +4,27 @@ html(ng-app="app")
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width,initial-scale=1")
     title Theatre booking
-    link(href="/stylesheets/bootstrap.css" rel="stylesheet")
-    link(href="/stylesheets/bootstrap-theme.css" rel="stylesheet")
+    style
+      include ../stylesheets/bootstrap.css
+    style
+      include ../stylesheets/bootstrap-theme.css
     meta(name="author" content="Volodymyr Prokopyuk")
   body
     block main
     include templates.jade
-    script(src="/javascripts/moment.js")
-    script(src="/javascripts/lodash.js")
-    script(src="/javascripts/jquery.js")
-    script(src="/javascripts/angular.js")
-    script(src="/javascripts/app.js")
-    script(src="/javascripts/services.js")
-    script(src="/javascripts/filters.js")
-    script(src="/javascripts/directives.js")
+    script
+      include ../javascripts/moment.js
+    script
+      include ../javascripts/lodash.js
+    script
+      include ../javascripts/jquery.js
+    script
+      include ../javascripts/angular.js
+    script
+      include ../javascripts/app.js
+    script
+      include ../javascripts/services.js
+    script
+      include ../javascripts/filters.js
+    script
+      include ../javascripts/directives.js
