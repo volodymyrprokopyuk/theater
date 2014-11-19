@@ -20,6 +20,6 @@ server.use(function(err, req, res, next) {
 });
 
 server.listen(server.get('port'), function() {
-  console.log('** server listening on http://:localhost:%s'
+  console.log('** server listening on http://localhost:%s'
     , server.get('port'));
 });

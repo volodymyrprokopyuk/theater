@@ -30,7 +30,7 @@ block main
               ng-class="importing && 'btn-success' || 'btn-info'") Import
           .col-xs-1
             p
-            button.btn.btn-danger.btn-sm(ng-click="clear()"
+            button.btn.btn-danger.btn-sm(ng-click="askClear()"
               ng-class="clearing && 'btn-success' || 'btn-danger'")
               | {{ clearing ? 'No' : 'Clear' }}
           .col-xs-6
@@ -49,15 +49,22 @@ block main
                   .col-xs-8
                     strong You are about to delete all bookings
                   .col-xs-4.text-right
-                    button.btn.btn-danger.btn-sm Yes, delete all bookings
+                    button.btn.btn-danger.btn-sm(ng-click="clear()")
+                      | Yes, delete all bookings
         div(ng-show="importing")
           .row
             .col-xs-12
               p
-              textarea.form-control(ng-model="imported")
+              textarea.form-control(ng-model="imported"
+                placeholder="Paste here previously exported file content and press Import again")
         div(ng-if="seat")
           p
           booking
         div(ng-if="bookings")
           p
           bookings
+        .row
+          .col-xs-12.text-right
+            p
+            h6
+              small Designed by Volodymyr Prokopyuk, 2014

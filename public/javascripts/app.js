@@ -28,7 +28,8 @@ app.controller('mainCtrl', function($scope, seats) {
 
   $scope.book = function(seat) {
     seat.status = 'booked';
-    seat.amount = parseInt(seat.amount);
+    seat.amount = _.isString(seat.amount)
+      ? parseFloat(seat.amount.replace(',', '.')) : seat.amount;
     seat.updatedOn = moment();
     seats.update(seat);
     $scope.seat = null;
@@ -58,13 +59,18 @@ app.controller('mainCtrl', function($scope, seats) {
 
   $scope.import = function() {
     $scope.importing = !$scope.importing;
-    if ($scope.imported) {
-      alert($scope.imported);
-      $scope.imported = null;
-    }
+    $scope.imported && (seats.load($scope.imported)
+      || alert('The data you are trying to import is corrupted')
+      , $scope.imported = null);
+  };
+
+  $scope.askClear = function() {
+    $scope.clearing = !$scope.clearing;
   };
 
   $scope.clear = function() {
-    $scope.clearing = !$scope.clearing;
+    seats.clear();
+    seats.save();
+    $scope.clearing = false;
   };
 });
