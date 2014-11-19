@@ -170,7 +170,7 @@ app.factory('tr', function() {
     , 'Booked on': 'Зарезервоване'
   };
 
-  var trans = en;
+  var trans = ua;
 
   var lng = function(language) {
     trans = language === 'en' ? en
