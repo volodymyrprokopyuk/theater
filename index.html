@@ -50,7 +50,7 @@
               </div>
             </div>
           </div>
-          <div ng-repeat="row in [ 1, 2 ]">
+          <div ng-repeat="row in [ 1, 2, 3, 4 ]">
             <div class="row">
               <div class="col-xs-6">
                 <row sector="B" row="{{ row }}"></row>
@@ -129,12 +129,22 @@
       <div class="row">
         <p></p>
         <div ng-repeat="seat in seats | filterRow:sector:row">
-          <div ng-if="(sector === 'A') || (sector === 'D')">
+          <div ng-if="sector === 'A'">
             <div class="col-xs-2">
               <seat></seat>
             </div>
           </div>
-          <div ng-if="(sector === 'B') || (sector === 'C')">
+          <div ng-if="sector === 'D'">
+            <div class="col-xs-2">
+              <seat></seat>
+            </div>
+          </div>
+          <div ng-if="sector === 'B'">
+            <div class="col-xs-1">
+              <seat></seat>
+            </div>
+          </div>
+          <div ng-if="sector === 'C'">
             <div class="col-xs-1">
               <seat></seat>
             </div>
@@ -638,7 +648,7 @@ app.controller('mainCtrl', function($scope, seats, tr) {
 
   var init = function() {
     // id, status, currency
-    seats = _.range(1, 65).map(function(id) {
+    seats = _.range(1, 67).map(function(id) {
       var seat = Seat();
       seat.id = id;
       seat.status = 'available';
@@ -647,9 +657,9 @@ app.controller('mainCtrl', function($scope, seats, tr) {
     // sector
     }).map(function(seat) {
       seat.sector = (seat.id > 0 && seat.id < 13) ? 'A'
-        : (seat.id > 12 && seat.id < 33) ? 'B'
-        : (seat.id > 32 && seat.id < 53) ? 'C'
-        : (seat.id > 52 && seat.id < 65) ? 'D' : '';
+        : (seat.id > 12 && seat.id < 35) ? 'B'
+        : (seat.id > 34 && seat.id < 55) ? 'C'
+        : (seat.id > 54 && seat.id < 67) ? 'D' : '';
       return seat;
     });
     // row, seat
@@ -658,14 +668,18 @@ app.controller('mainCtrl', function($scope, seats, tr) {
       _.merge(seat, ++location.seat > seatsPerRow
         ? (location.seat = 1, ++location.row, location) : location);
     };
+    var distribute3 = _.partial(distribute, 3);
     var distribute4 = _.partial(distribute, 4);
-    var distribute10 = _.partial(distribute, 10);
+    var distribute8 = _.partial(distribute, 8);
+    var distribute9 = _.partial(distribute, 9);
     location = { row: 1, seat: 0 };
     _.filter(seats, { sector: 'A' }).map(distribute4);
     location = { row: 1, seat: 0 };
-    _.filter(seats, { sector: 'B' }).map(distribute10);
+    _.filter(seats, { sector: 'B' }).map(distribute8);
+    location = { row: 3, seat: 0 };
+    _.filter(seats, { sector: 'B', row: 3 }).map(distribute3);
     location = { row: 1, seat: 0 };
-    _.filter(seats, { sector: 'C' }).map(distribute10);
+    _.filter(seats, { sector: 'C' }).map(distribute9);
     location = { row: 1, seat: 0 };
     _.filter(seats, { sector: 'D' }).map(distribute4);
   };

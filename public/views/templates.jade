@@ -7,10 +7,16 @@ script#row(type="text/ng-template")
   .row
     p
     div(ng-repeat="seat in seats | filterRow:sector:row")
-      div(ng-if="(sector === 'A') || (sector === 'D')")
+      div(ng-if="sector === 'A'")
         .col-xs-2
           seat
-      div(ng-if="(sector === 'B') || (sector === 'C')")
+      div(ng-if="sector === 'D'")
+        .col-xs-2
+          seat
+      div(ng-if="sector === 'B'")
+        .col-xs-1
+          seat
+      div(ng-if="sector === 'C'")
         .col-xs-1
           seat
 

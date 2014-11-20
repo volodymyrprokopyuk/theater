@@ -3,7 +3,7 @@ app.factory('seats', function() {
 
   var init = function() {
     // id, status, currency
-    seats = _.range(1, 65).map(function(id) {
+    seats = _.range(1, 67).map(function(id) {
       var seat = Seat();
       seat.id = id;
       seat.status = 'available';
@@ -12,9 +12,9 @@ app.factory('seats', function() {
     // sector
     }).map(function(seat) {
       seat.sector = (seat.id > 0 && seat.id < 13) ? 'A'
-        : (seat.id > 12 && seat.id < 33) ? 'B'
-        : (seat.id > 32 && seat.id < 53) ? 'C'
-        : (seat.id > 52 && seat.id < 65) ? 'D' : '';
+        : (seat.id > 12 && seat.id < 35) ? 'B'
+        : (seat.id > 34 && seat.id < 55) ? 'C'
+        : (seat.id > 54 && seat.id < 67) ? 'D' : '';
       return seat;
     });
     // row, seat
@@ -23,14 +23,18 @@ app.factory('seats', function() {
       _.merge(seat, ++location.seat > seatsPerRow
         ? (location.seat = 1, ++location.row, location) : location);
     };
+    var distribute3 = _.partial(distribute, 3);
     var distribute4 = _.partial(distribute, 4);
-    var distribute10 = _.partial(distribute, 10);
+    var distribute8 = _.partial(distribute, 8);
+    var distribute9 = _.partial(distribute, 9);
     location = { row: 1, seat: 0 };
     _.filter(seats, { sector: 'A' }).map(distribute4);
     location = { row: 1, seat: 0 };
-    _.filter(seats, { sector: 'B' }).map(distribute10);
+    _.filter(seats, { sector: 'B' }).map(distribute8);
+    location = { row: 3, seat: 0 };
+    _.filter(seats, { sector: 'B', row: 3 }).map(distribute3);
     location = { row: 1, seat: 0 };
-    _.filter(seats, { sector: 'C' }).map(distribute10);
+    _.filter(seats, { sector: 'C' }).map(distribute9);
     location = { row: 1, seat: 0 };
     _.filter(seats, { sector: 'D' }).map(distribute4);
   };
