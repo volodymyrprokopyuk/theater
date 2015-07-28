@@ -1,0 +1,15 @@
+rule html
+  command = jade --pretty --out . $in
+  description = [ $out ]
+
+build index.html: html public/views/index.jade | $
+  public/views/base.jade $
+  public/views/templates.jade $
+  public/stylesheets/bootstrap.css $
+  public/stylesheets/bootstrap-theme.css $
+  public/javascripts/app.js $
+  public/javascripts/services.js $
+  public/javascripts/directives.js $
+  public/javascripts/filters.js
+
+default index.html
