@@ -7,7 +7,7 @@ Application (SPA). The SPA application is implemented using
 
 #### Main features:
 - visual seat on scene presentation
-- intuituve booked/available seat presentation
+- intuitive booked/available seat presentation
 - offline operation mode using Browser Local Storage
 - JSON export
 - JSON import
