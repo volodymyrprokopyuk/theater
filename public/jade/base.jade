@@ -1,0 +1,30 @@
+doctype html
+html(ng-app="app")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    title Theatre booking
+    style
+      include ../css/bootstrap.css
+    style
+      include ../css/bootstrap-theme.css
+    meta(name="author" content="Volodymyr Prokopyuk")
+  body
+    block main
+    include templates.jade
+    script
+      include ../js/moment.js
+    script
+      include ../js/lodash.js
+    script
+      include ../js/jquery.js
+    script
+      include ../js/angular.js
+    script
+      include ../js/app.js
+    script
+      include ../js/services.js
+    script
+      include ../js/filters.js
+    script
+      include ../js/directives.js

@@ -109,7 +109,7 @@ app.factory('seats', function() {
 app.factory('tr', function() {
 
   var en = {
-    'Theatre booking': 'Theatre booking'
+    'Theater booking': 'Theater booking'
     , 'Export': 'Export'
     , 'Import': 'Import'
     , 'No': 'No'
@@ -144,7 +144,7 @@ app.factory('tr', function() {
   };
 
   var ua = {
-    'Theatre booking': 'Резервування театральних квитків'
+    'Theater booking': 'Резервування театральних квитків'
     , 'Export': 'Експорт'
     , 'Import': 'Імпорт'
     , 'No': 'Ні'

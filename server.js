@@ -1,10 +1,8 @@
 var express = require('express');
 
 var server = express();
-server.set('port', 4000);
-server.set('views', __dirname + '/public/views');
+server.set('views', __dirname + '/public/jade');
 server.set('view engine', 'jade');
-server.use(express.static(__dirname + '/public'));
 
 server.get('/', function(req, res) {
   res.render('index');
@@ -19,7 +17,6 @@ server.use(function(err, req, res, next) {
   res.status(500).send('Internal Server Error');
 });
 
-server.listen(server.get('port'), function() {
-  console.log('** server listening on http://localhost:%s'
-    , server.get('port'));
+server.listen(4000, function() {
+  console.log('** http://localhost:%s', 4000);
 });

@@ -1,13 +1,13 @@
 {
-  "name": "theatre"
+  "name": "theater"
   , "version": "0.1.0"
-  , "description": "Theatre booking application"
+  , "description": "Theater booking application"
   , "author": "Volodymyr Prokopyuk <volodymyrprokopyuk@gmail.com>"
   , "main": "server.js"
   , "repository": "github.com/volodymyrprokopyuk/theatre.git"
   , "licence": "MIT"
   , "dependencies": {
-    "express": "^4.10.x"
-    , "jade": "^1.7.x"
+    "express": "^4.13.x"
+    , "jade": "^1.11.x"
   }
 }

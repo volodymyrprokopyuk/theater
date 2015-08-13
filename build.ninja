@@ -1,15 +1,27 @@
 rule html
-  command = jade --pretty --out . $in
+  command = jade --pretty --out public/html $in
   description = [ $out ]
 
-build index.html: html public/views/index.jade | $
-  public/views/base.jade $
-  public/views/templates.jade $
-  public/stylesheets/bootstrap.css $
-  public/stylesheets/bootstrap-theme.css $
-  public/javascripts/app.js $
-  public/javascripts/services.js $
-  public/javascripts/directives.js $
-  public/javascripts/filters.js
+build public/html/index.html: html public/jade/index.jade | $
+  public/jade/base.jade $
+  public/jade/templates.jade $
+  public/css/bootstrap.css $
+  public/css/bootstrap-theme.css $
+  public/js/app.js $
+  public/js/services.js $
+  public/js/directives.js $
+  public/js/filters.js
 
-default index.html
+rule deploy
+  command = git subtree push --prefix public/html origin gh-pages
+  description = [ GitHub Pages ]
+
+build deploy: deploy
+
+rule clean
+  command = rm public/html/index.html
+  description = [ Cleaning ]
+
+build clean: clean
+
+default public/html/index.html
